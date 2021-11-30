@@ -12,22 +12,21 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
-      - name: Build with Maven
-        env: # Set the secret as an environment variable
-          TG_MTB_TOKEN: ${{ secrets.TG_MTB_TOKEN }}
-          TG_MTB_USERNAME: ${{ secrets.TG_MTB_USERNAME }}
-        run: |
-          export TG_MTB_TOKEN=env.TG_MTB_TOKEN
-          export TG_MTB_USERNAME=env.TG_MTB_USERNAME
-          mvn -B package --file pom.xml
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: maven
+    - name: Build with Maven
+      env: # Set the secret as an environment variable
+        TG_MTB_TOKEN: ${{ secrets.TG_MTB_TOKEN }}
+        TG_MTB_USERNAME: ${{ secrets.TG_MTB_USERNAME }}
+      run: |
+        export TG_MTB_TOKEN=env.TG_MTB_TOKEN
+        export TG_MTB_USERNAME=env.TG_MTB_USERNAME
+        mvn -B package --file pom.xml
