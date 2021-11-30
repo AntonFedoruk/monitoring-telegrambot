@@ -22,8 +22,11 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: maven
-    - name: Build with Maven
-      env: # Set the secret as an environment variable
         TG_MTB_TOKEN: ${{ secrets.TG_MTB_TOKEN }}
         TG_MTB_USERNAME: ${{ secrets.TG_MTB_USERNAME }}
+    - name: Build with Maven
+#       env: # Set the secret as an environment variable
+#         TG_MTB_TOKEN: ${{ secrets.TG_MTB_TOKEN }}
+#         TG_MTB_USERNAME: ${{ secrets.TG_MTB_USERNAME }}
       run: mvn -B package --file pom.xml
+      
