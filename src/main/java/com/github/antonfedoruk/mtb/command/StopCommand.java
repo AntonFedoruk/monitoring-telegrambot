@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 public class StopCommand implements Command {
     private final SendBotMessageService sendBotMessageService;
-    public final String STOP_MESSAGE = "Вимкнув всі відслідковування.";
+    public static final String STOP_MESSAGE = "Вимкнув всі відслідковування.";
 
     // DO NOT USE @Autowired to get 'sendBotMessageService' bean from Application Context, to avoid circle dependency.
     public StopCommand(SendBotMessageService sendBotMessageService) {
