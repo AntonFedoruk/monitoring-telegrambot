@@ -2,8 +2,10 @@ package com.github.antonfedoruk.mtb.bot;
 
 import com.github.antonfedoruk.mtb.command.CommandContainer;
 import com.github.antonfedoruk.mtb.service.SendBotMessageServiceImpl;
+import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -27,8 +29,9 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
     @Value("${telegrambot.botToken}")
     String botToken;
 
-    public MonitoringTelegramBot() {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this));
+    @Autowired
+    public MonitoringTelegramBot(TelegramUserService telegramUserService) {
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
     }
 
     @Override
