@@ -31,8 +31,8 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: |
-          export TG_MTB_DB_USERNAME=${{ secrets.TG_MTB_DB_USERNAME }}
-          export TG_MTB_DB_PASSWORD=${{ secrets.TG_MTB_DB_PASSWORD }}
+          export TG_MTB_DB_USERNAME=dev_mtb_db_user
+          export TG_MTB_DB_PASSWORD=dev_mtb_db_password
           export TG_MTB_TOKEN=${{ secrets.TG_MTB_TOKEN }}
           export TG_MTB_USERNAME=${{ secrets.TG_MTB_USERNAME }}
           mvn -B package --file pom.xml
