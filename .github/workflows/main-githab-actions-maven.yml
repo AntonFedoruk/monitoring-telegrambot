@@ -21,7 +21,7 @@ jobs:
           mysql version: '5.7'
           mysql database: 'dev_mtb_db'
           mysql root password: 'root'
-          mysql user: 'dev_mtb_db_u'
+          mysql user: 'dev_mtb_db_user'
           mysql password: 'dev_mtb_db_password'
       - name: Set up JDK 11
         uses: actions/setup-java@v2
