@@ -6,6 +6,7 @@ FROM adoptopenjdk/openjdk11:ubi
 ARG JAR_FILE=target/*.jar
 
 # Теперь нужно передать эти переменные внутрь докер контейнера. Это environment variable.
+# !!! Значения переменных будут другие. Те, которые мы передадим в Dockerfile, тем не менее, требуют дать значения по умолчанию
 ENV BOT_NAME=defaultg_bot
 ENV BOT_TOKEN=2222222222:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 ENV BOT_DB_USERNAME=db_username
