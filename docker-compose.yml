@@ -3,12 +3,9 @@ version: '3.1'
 
 #services: говорит о том, что все следующие строки после этого (будут сдвинуты) — относятся к сервисам, которые мы настраиваем.
 services:
-  # java-приложение под названием mtb. И уже под ним будут все его настройки.
   mtb:
-    # Это значит, что перед запуском приложения мы ожидаем, что запустится база данных.
     depends_on:
-      - mtb-db
-    # build: context: . говорит о том, что мы будем искать Dockerfile в той же директории, что и docker-compose.yml.
+      - 'mtb-db'
     build:
       context: .
     # Cекция environment: отвечает за то, чтобы мы передали в Dockerfile необходимые переменные среды (environment variables).
@@ -19,21 +16,15 @@ services:
       BOT_DB_USERNAME: ${BOT_DB_USERNAME}
       BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
     restart: always
-  # настройка работы с базой данных
   mtb-db:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'mtb_db'
-      # So you don't have to use root, but you can if you like
       MYSQL_USER: ${BOT_DB_USERNAME}
-      # You can use whatever password you like
       MYSQL_PASSWORD: ${BOT_DB_PASSWORD}
-      # Password for root access
+      MYSQL_DATABASE: 'mtb_db'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
     expose:
-      # Opens port 3306 on the container
       - '3306'
