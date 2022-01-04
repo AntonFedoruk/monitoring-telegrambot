@@ -15,9 +15,10 @@ public class HelpCommand implements Command {
 
                     + "<b>Розпочати\\закінчить роботу з ботом</b>\n"
                     + "%s - розпочать роботу зі мнойю\n"
-                    + "%s - призупинити роботу зі мнойю\n\n"
-                    + "%s - отримати допомогу в роботі зі мною\n",
-            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName());
+                    + "%s - призупинити роботу зі мнойю\n"
+                    + "%s - отримати допомогу в роботі зі мною\n"
+                    + "%s - показати кількість активних користувачів\n",
+            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName(), STAT.getCommandName());
 
     // DO NOT USE @Autowired to get 'sendBotMessageService' bean from Application Context, to avoid circle dependency.
     public HelpCommand(SendBotMessageService sendBotMessageService) {

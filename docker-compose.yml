@@ -2,15 +2,29 @@
 version: '3.1'
 
 #services: говорит о том, что все следующие строки после этого (будут сдвинуты) — относятся к сервисам, которые мы настраиваем.
-# У нас такой пока только один — java-приложение под названием mtb. И уже под ним будут все его настройки.
-# Например, build: context: . говорит о том, что мы будем искать Dockerfile в той же директории, что и docker-compose.yml.
 services:
   mtb:
+    depends_on:
+      - 'mtb-db'
     build:
       context: .
-#   Cекция environment: отвечает за то, чтобы мы передали в Dockerfile необходимые переменные среды (environment variables).
-#   Как раз то, что нам и нужно. Поэтому ниже мы переменные и передаем. Их docker-compose будет искать в переменных операционной среды сервера. Добавим их в баш скрипте.
+    # Cекция environment: отвечает за то, чтобы мы передали в Dockerfile необходимые переменные среды (environment variables).
+    # Как раз то, что нам и нужно. Поэтому ниже мы переменные и передаем. Их docker-compose будет искать в переменных операционной среды сервера. Добавим их в баш скрипте.
     environment:
-      - BOT_NAME=${BOT_NAME}
-      - BOT_TOKEN=${BOT_TOKEN}
+      BOT_NAME: ${BOT_NAME}
+      BOT_TOKEN: ${BOT_TOKEN}
+      BOT_DB_USERNAME: ${BOT_DB_USERNAME}
+      BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
     restart: always
+  mtb-db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: ${BOT_DB_USERNAME}
+      MYSQL_PASSWORD: ${BOT_DB_PASSWORD}
+      MYSQL_DATABASE: 'mtb_db'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
