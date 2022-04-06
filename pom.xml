@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <telegram.starter.version>5.4.0.1</telegram.starter.version>
         <selenium.version>4.0.0</selenium.version>
+        <apache.commons.version>3.11</apache.commons.version>
     </properties>
     <dependencies>
         <dependency>
@@ -78,6 +79,11 @@
             <version>1.14.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.commons.version}</version>
+        </dependency>
 
     </dependencies>
 

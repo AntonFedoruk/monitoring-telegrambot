@@ -1,5 +1,6 @@
 package com.github.antonfedoruk.mtb.repository;
 
+import com.github.antonfedoruk.mtb.repository.entity.StationSub;
 import com.github.antonfedoruk.mtb.repository.entity.TelegramUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
@@ -52,5 +54,22 @@ class TelegramUserRepositoryIT {
         // then
         Assertions.assertTrue(saved.isPresent());
         Assertions.assertEquals(telegramUser, saved.get());
+    }
+
+    @Sql(scripts = {"/sql/clearDbs.sql", "/sql/fiveMonitoringSubsForUser.sql"})
+    @Test
+    @DisplayName("Should properly get all monitoring subscriptions for user")
+    void shouldProperlyGetAllMonitoringSubscriptionsForUser() {
+        // when
+        Optional<TelegramUser> userFromDB = telegramUserRepository.findById("1");
+
+        // then
+        Assertions.assertTrue(userFromDB.isPresent());
+        List<StationSub> stationSubs = userFromDB.get().getStationSubs();
+        for (int i = 0; i < stationSubs.size(); i++) {
+            Assertions.assertEquals(String.format("g%s", (i + 1)), stationSubs.get(i).getTitle());
+            Assertions.assertEquals(i + 1, stationSubs.get(i).getId());
+            Assertions.assertEquals(i + 1, stationSubs.get(i).getLastUpdateId());
+        }
     }
 }

@@ -38,7 +38,7 @@ public class SeleniumConfiguration {
     public ChromeDriver driver() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");// Bypass OS security model, MUST BE THE VERY FIRST OPTION
-        chromeOptions.addArguments("--headless");
+//        chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--disable-dev-shm-usage");// overcome limited resource problems
         chromeOptions.addArguments("--start-maximized"); //or: driver.manage().window().maximize();
         //create chrome instance

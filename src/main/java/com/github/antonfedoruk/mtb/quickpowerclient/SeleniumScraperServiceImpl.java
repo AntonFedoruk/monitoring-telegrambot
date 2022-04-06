@@ -1,5 +1,6 @@
 package com.github.antonfedoruk.mtb.quickpowerclient;
 
+import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +28,7 @@ public class SeleniumScraperServiceImpl implements ScraperService {
     @Value("${quickpower.login.value}")
     private String login;
     @Setter
-    @Value("${quickpower.password.val")
+    @Value("${quickpower.password.value}")
     private String password;
 
     public void setLogin(String login) {
@@ -41,20 +42,20 @@ public class SeleniumScraperServiceImpl implements ScraperService {
 
     public SeleniumScraperServiceImpl(ChromeDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(120));
     }
 
-    @Getter
-    @AllArgsConstructor
-    public class Station {
-        private String location;
-        private String address;
-        private String status;
-    }
+//    @Getter
+//    @AllArgsConstructor
+//    public class Station {
+//        private String location;
+//        private String address;
+//        private String status;
+//    }
 
     //get list of stations from site
     @Override
-    public List<Station> extractStations() {
+    public List<com.github.antonfedoruk.mtb.quickpowerclient.dto.Station> extractStations() {
         driver.get(quickpowerUrl);
 
         signIn(login, password);
@@ -77,7 +78,11 @@ public class SeleniumScraperServiceImpl implements ScraperService {
         String location = getStationLocation(element);
         String address = getStationAddres(element);
         String status = getStationStatus(element);
-        return new Station(location, address, status);
+        Station station = new Station();
+        station.setLocation(address);
+        station.setName(location);
+        station.setId(Integer.valueOf(String.valueOf(location.hashCode()).substring(0,5)));
+        return station;
     }
 
     private String getStationStatus(WebElement element) {
@@ -106,8 +111,8 @@ public class SeleniumScraperServiceImpl implements ScraperService {
         } catch (Exception e) {
             System.out.println("Station loading failed.");
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     private void signIn(String login, String password) {

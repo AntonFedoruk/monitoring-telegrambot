@@ -4,10 +4,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Telegram User entity.
@@ -23,4 +21,8 @@ public class TelegramUser {
 
     @Column(name = "active")
     boolean active;
+
+    //Это поле использует джоины, написанные в StationSub сущности.
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    List<StationSub> stationSubs;
 }
