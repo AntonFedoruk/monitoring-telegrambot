@@ -1,6 +1,8 @@
 package com.github.antonfedoruk.mtb.command;
 
+import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageService;
+import com.github.antonfedoruk.mtb.service.StationSubService;
 import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +23,10 @@ class CommandContainerTest {
     public void init() {
         SendBotMessageService sendBotMessageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
-        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService);
+        QuickpowerStationClient quickpowerStationClient = Mockito.mock(QuickpowerStationClient.class);
+        StationSubService stationSubService = Mockito.mock(StationSubService.class);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService,
+                quickpowerStationClient, stationSubService);
     }
 
     @Test
