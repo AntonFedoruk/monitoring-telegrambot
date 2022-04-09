@@ -1,8 +1,6 @@
 package com.github.antonfedoruk.mtb.quickpowerclient;
 
 import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -31,9 +29,7 @@ public class SeleniumScraperServiceImpl implements ScraperService {
     @Value("${quickpower.password.value}")
     private String password;
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+    private boolean isLogged = false;
 
     //WebDriver represents the browser
     private final ChromeDriver driver;
@@ -42,26 +38,19 @@ public class SeleniumScraperServiceImpl implements ScraperService {
 
     public SeleniumScraperServiceImpl(ChromeDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
-//    @Getter
-//    @AllArgsConstructor
-//    public class Station {
-//        private String location;
-//        private String address;
-//        private String status;
-//    }
 
     //get list of stations from site
     @Override
-    public List<com.github.antonfedoruk.mtb.quickpowerclient.dto.Station> extractStations() {
+    public List<Station> extractStations() {
+        System.out.println("Go to website.");
         driver.get(quickpowerUrl);
 
+        System.out.println("Log in.");
         signIn(login, password);
 
         List<WebElement> stationsFromPage = getStationsFromPage();
-//        System.out.println("size : " + stationsFromPage.size()); //8
         return convertElementsListToStationsList(stationsFromPage);
 
     }
@@ -81,7 +70,7 @@ public class SeleniumScraperServiceImpl implements ScraperService {
         Station station = new Station();
         station.setLocation(address);
         station.setName(location);
-        station.setId(Integer.valueOf(String.valueOf(location.hashCode()).substring(0,5)));
+        station.setId(Math.abs(location.hashCode()));
         return station;
     }
 
@@ -99,14 +88,12 @@ public class SeleniumScraperServiceImpl implements ScraperService {
 
     private List<WebElement> getStationsFromPage() {
         String stationListElementCssSelector = "ul.sc-kgoBCf.hOeolh";
+        System.out.println("Trying to get stations.");
         try {
             wait.until(webDriver -> webDriver.findElement(By.cssSelector(stationListElementCssSelector))); //
 
             WebElement chargeListElement = driver.findElement(By.cssSelector(stationListElementCssSelector));
-
-            System.out.println("*******************");
-            System.out.println("Locations: ");
-
+            System.out.println("Station list obtained");
             return chargeListElement.findElements(By.cssSelector("li.withCP"));
         } catch (Exception e) {
             System.out.println("Station loading failed.");
@@ -116,12 +103,16 @@ public class SeleniumScraperServiceImpl implements ScraperService {
     }
 
     private void signIn(String login, String password) {
+        if (isLogged) {
+            return;
+        }
+
         String inputLoginXpath = "//input[@placeholder='Enter login...']";
 
         try {
             wait.until(webDriver -> webDriver.findElement(By.xpath(inputLoginXpath)));
-
             // fill login data on sign-in page
+            System.out.println("fill login data on sign-in page...");
             driver.findElement(By.xpath(inputLoginXpath)).sendKeys(login);
             String inputPasswordXpath = "//input[@placeholder='Enter password...']";
             driver.findElement(By.xpath(inputPasswordXpath)).sendKeys(password);
@@ -131,5 +122,6 @@ public class SeleniumScraperServiceImpl implements ScraperService {
             System.out.println("Sign in failed!");
             e.printStackTrace();
         }
+        isLogged = true;
     }
 }
