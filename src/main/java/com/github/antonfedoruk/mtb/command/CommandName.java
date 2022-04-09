@@ -17,7 +17,8 @@ public enum CommandName {
     HELP("/help"),
     STAT("/stat"),
     ADD_STATION_SUB("/addstationsub"),
-    NO(""),;
+    LIST_STATION_SUB("/liststationsub"),
+    NO("");
 
     final String commandName;
 }

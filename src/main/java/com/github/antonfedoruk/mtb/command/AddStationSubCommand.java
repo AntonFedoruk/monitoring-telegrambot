@@ -1,7 +1,6 @@
 package com.github.antonfedoruk.mtb.command;
 
 import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
-import com.github.antonfedoruk.mtb.quickpowerclient.ScraperService;
 import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
 import com.github.antonfedoruk.mtb.repository.entity.StationSub;
 import com.github.antonfedoruk.mtb.service.SendBotMessageService;
@@ -13,7 +12,6 @@ import java.util.stream.Collectors;
 import static com.github.antonfedoruk.mtb.command.CommandName.ADD_STATION_SUB;
 import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
 import static com.github.antonfedoruk.mtb.command.CommandUtils.getMessage;
-
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
@@ -43,30 +41,31 @@ public class AddStationSubCommand implements Command {
         String chatId = getChatId(update);
         if (isNumeric(stationId)) {
             Station stationById = quickpowerStationClient.getStationById(Integer.parseInt(stationId));
+            System.out.println("Trying to subscribe on " + stationById.getName());
             if (isNull(stationById.getId())) {
                 sendStationNotFound(chatId, stationId);
             }
             StationSub savedStationSub = stationSubService.save(chatId, stationById);
-            sendBotMessageService.sendMessage(chatId, "Подписал на мониторинг станции " + savedStationSub.getTitle().toUpperCase());
+            sendBotMessageService.sendMessage(chatId, "Підписано на моніторинг станції " + savedStationSub.getTitle().toUpperCase());
         } else {
             sendStationNotFound(chatId, stationId);
         }
     }
 
     private void sendStationNotFound(String chatId, String stationId) {
-        String stationNotFoundMessage = "Нет станции с ID = \"%s\"";
+        String stationNotFoundMessage = "Відсутня станція з ID = \"%s\"";
         sendBotMessageService.sendMessage(chatId, String.format( stationNotFoundMessage, stationId));
     }
 
     private void sendStationIdList(String chatId) {
         String stationIds = quickpowerStationClient.getStationList().stream()
-                .map(station -> String.format("%s - %s \n", station.getName(), station.getId()))
+                .map(station -> String.format("%s - '%s' \n", station.getName(), station.getId()))
                 .collect(Collectors.joining());
 
-        String message = "Чтобы подписаться на мониторинг станции - передай комадну вместе с ID станции. \n" +
-                "Например: /addstationsub 123. \n\n" +
-                "я подготовил список всех станций - выберай какую хочешь :) \n\n" +
-                "имя станции - ID станции \n\n" +
+        String message = "Щоб підписатись на моніторинг станції - передайте команду разом з ID станції. \n" +
+                "Приклад: /addstationsub 123. \n\n" +
+                "Ось список всіх доступних станцій:) \n\n" +
+                "'назва станції' - 'ID_станції' \n\n" +
                 "%s";
 
         sendBotMessageService.sendMessage(chatId, String.format( message, stationIds));
