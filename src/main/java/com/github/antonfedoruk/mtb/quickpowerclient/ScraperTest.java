@@ -1,5 +1,6 @@
 package com.github.antonfedoruk.mtb.quickpowerclient;
 
+import com.github.antonfedoruk.mtb.quickpowerclient.dto.StationStatus;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -63,14 +64,21 @@ public class ScraperTest {
 //        System.out.println("2nd: " + chargeLocations.get(2).getText());
 //        System.out.println("2nd #s: " + chargeLocations.get(2).findElements(By.cssSelector("span")).size()); //14
 
-//        System.out.println("STATUS: " + chargeLocations.get(2).findElement(By.cssSelector("span.location > span:first-child")).getAttribute("title")); //online
+//        total status
+//        String stationStatusFromTitle = chargeLocations.get(2).findElement(By.cssSelector("span.location > span:first-child")).getAttribute("title");
+//        System.out.println("STATUS: " + stationStatusFromTitle); //online
+//        for (StationStatus status : StationStatus.values()) {
+//            if (status.name().equalsIgnoreCase(stationStatusFromTitle)) {
+//                System.out.println(status.name());
+//            }
+//        }
+
+
 //        System.out.println("LOCATION: " + chargeLocations.get(2).findElement(By.cssSelector("span.location > span:last-child")).getText()); //Arkadia, Osokorky
 //        System.out.println("ADDRESS: " + chargeLocations.get(2).findElement(By.cssSelector("span.location + span")).getText()); // 13, Sribnokil's'ka str.
 //        System.out.println("AMOUNT OF substations: " + chargeLocations.get(2).findElements(By.cssSelector("span.stationsStatus > ul > li")).size());
 
         //todo елементарна перевірка статуса
-
-
 
 //        for (WebElement location : chargeLocations) {
 //            System.out.println(location.findElement(By.xpath("(//span)[2]")).getText());

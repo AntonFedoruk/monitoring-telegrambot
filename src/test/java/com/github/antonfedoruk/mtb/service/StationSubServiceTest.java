@@ -13,8 +13,6 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DisplayName("Unit-level testing for StationSubService")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class StationSubServiceTest {
@@ -43,11 +41,11 @@ class StationSubServiceTest {
         // given
         Station station = new Station();
         station.setId(1);
-        station.setLocation("g1");
+        station.setAddress("g1");
 
         StationSub expectedStationSub = new StationSub();
         expectedStationSub.setId(station.getId());
-        expectedStationSub.setTitle(station.getLocation());
+        expectedStationSub.setTitle(station.getAddress());
         expectedStationSub.addUser(newUser);
 
         // when
@@ -67,18 +65,18 @@ class StationSubServiceTest {
 
         Station station = new Station();
         station.setId(1);
-        station.setLocation("g1");
+        station.setAddress("g1");
 
         StationSub stationFromDB = new StationSub();
         stationFromDB.setId(station.getId());
-        stationFromDB.setTitle(station.getLocation());
+        stationFromDB.setTitle(station.getAddress());
         stationFromDB.addUser(oldTelegramUser);
 
         Mockito.when(stationSubRepository.findById(station.getId())).thenReturn(Optional.of(stationFromDB));
 
         StationSub expectedStationSub = new StationSub();
         expectedStationSub.setId(station.getId());
-        expectedStationSub.setTitle(station.getLocation());
+        expectedStationSub.setTitle(station.getAddress());
         expectedStationSub.addUser(newUser);
         expectedStationSub.addUser(oldTelegramUser);
         // when
