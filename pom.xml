@@ -67,7 +67,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
+      
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -92,7 +92,6 @@
             <artifactId>emoji-java</artifactId>
             <version>${com.vdurmont}</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -100,6 +99,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+<!--        todo attempt to fix [ERROR] Error executing Maven.-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>11</source>   <!-- maven.compiler.source  -->
+                    <target>11</target> <!-- maven.compiler.target -->
+                </configuration>
             </plugin>
         </plugins>
     </build>
