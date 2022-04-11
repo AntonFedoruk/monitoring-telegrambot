@@ -10,8 +10,8 @@ export TG_MTB_DB_USERNAME='mtb_db_user'
 export TG_MTB_DB_PASSWORD='mtb_db_password'
 
 # Prepare Jar
-mvn clean
-mvn package -Dmaven.test.skip
+#mvn clean
+#mvn package
 
 # Ensure, that docker-compose stopped
 docker-compose stop

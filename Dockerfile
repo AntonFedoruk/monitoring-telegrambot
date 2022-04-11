@@ -27,6 +27,3 @@ COPY ${JAR_FILE} app.jar
 # !!!!!! Последняя строка в Dockerfile (которая начинается с ENTRYPOINT) должна быть без переноса элементов.
 # !!!!!! Если сделать перенос, работать этот код не будет.
 ENTRYPOINT ["java","-Dspring.datasource.username=${BOT_DB_USERNAME}","-Dspring.datasource.password=${BOT_DB_PASSWORD}","-Dtelegrambot.botUserName=${BOT_NAME}","-Dtelegrambot.botToken=${BOT_TOKEN}","-jar","app.jar"]
-#ENTRYPOINT ["java","-Dspring.datasource.username=root","-Dspring.datasource.password=root","-Dtelegrambot.botUserName=${BOT_NAME}","-Dtelegrambot.botToken=${BOT_TOKEN}","-jar","app.jar"]
-#CMD ["./wait-for-mysql.sh","mtb-db","root","java","-Dspring.datasource.username=root","-Dspring.datasource.password=root","-Dtelegrambot.botUserName=${BOT_NAME}","-Dtelegrambot.botToken=${BOT_TOKEN}","-jar","app.jar"]
-#CMD ["./wait-for-mysql.sh","java","-Dspring.datasource.username=root","-Dspring.datasource.password=root","-Dtelegrambot.botUserName=${BOT_NAME}","-Dtelegrambot.botToken=${BOT_TOKEN}","-jar","app.jar"]

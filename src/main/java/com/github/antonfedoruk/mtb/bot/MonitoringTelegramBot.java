@@ -1,7 +1,11 @@
 package com.github.antonfedoruk.mtb.bot;
 
 import com.github.antonfedoruk.mtb.command.CommandContainer;
+import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageServiceImpl;
+
+import com.github.antonfedoruk.mtb.service.StationSubService;
+
 import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -30,8 +34,9 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
     String botToken;
 
     @Autowired
-    public MonitoringTelegramBot(TelegramUserService telegramUserService) {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
+
+    public MonitoringTelegramBot(TelegramUserService telegramUserService, QuickpowerStationClient quickpowerStationClient, StationSubService stationSubService) {
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, quickpowerStationClient, stationSubService);
     }
 
     @Override
