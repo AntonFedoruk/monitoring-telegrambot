@@ -1,15 +1,19 @@
 #Release Notes
 
+## 0.5.0-SNAPSHOT
+*   Added the ability to see a list of subscriptions.
+*   Added the ability to subscribe on station monitoring.
+
 ## 0.4.0-SNAPSHOT
-*   added repository layer
+*   Added repository layer.
 
 ## 0.3.0-SNAPSHOT
-*   added deployment process to the project
+*   Added deployment process to the project.
 
 ## 0.2.0-SNAPSHOT
-*   implemented Command pattern for handling Telegram Bo commands. Added commands: help, start, stop.
-*   added test for SendBotMessageService. Added tests that cover the implementation of the Command pattern.
+*   Implemented Command pattern for handling Telegram Bo commands. Added commands: help, start, stop.
+*   Added test for SendBotMessageService. Added tests that cover the implementation of the Command pattern.
 
 ## 0.1.0-SNAPSHOT
-*   added stub telegram bot
-*   added SpringBoot skeleton project
+*   Added stub telegram bot.
+*   Added SpringBoot skeleton project.
