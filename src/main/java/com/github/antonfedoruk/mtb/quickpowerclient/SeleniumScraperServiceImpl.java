@@ -1,6 +1,7 @@
 package com.github.antonfedoruk.mtb.quickpowerclient;
 
 import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
+import com.github.antonfedoruk.mtb.quickpowerclient.dto.StationStatus;
 import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -65,25 +66,37 @@ public class SeleniumScraperServiceImpl implements ScraperService {
 
     private Station parseWebElementToStation(WebElement element) {
         String location = getStationLocation(element);
-        String address = getStationAddres(element);
-        String status = getStationStatus(element);
+        String address = getStationAddress(element);
+        StationStatus stationStatus = getStationStatus(element);
         Station station = new Station();
-        station.setLocation(address);
+        station.setAddress(address);
         station.setName(location);
         station.setId(Math.abs(location.hashCode()));
+        station.setStationStatus(stationStatus);
         return station;
     }
 
-    private String getStationStatus(WebElement element) {
-        return element.findElement(By.cssSelector("span.location > span:first-child")).getAttribute("title");
-    }
+//    private String getStationStatus(WebElement element) {
+//        return element.findElement(By.cssSelector("span.location > span:first-child")).getAttribute("title");
+//    }
 
-    private String getStationAddres(WebElement element) {
+    private String getStationAddress(WebElement element) {
         return element.findElement(By.cssSelector("span.location + span")).getText();
     }
 
     private String getStationLocation(WebElement element) {
         return element.findElement(By.cssSelector("span.location > span:last-child")).getText();
+    }
+
+    private StationStatus getStationStatus(WebElement element) {
+        String statusFromElement = element.findElement(By.cssSelector("span.location > span:first-child")).getAttribute("title");
+
+        for (StationStatus status : StationStatus.values()) {
+            if (status.name().equalsIgnoreCase(statusFromElement)) {
+                return status;
+            }
+        }
+        return StationStatus.ERROR;
     }
 
     private List<WebElement> getStationsFromPage() {

@@ -18,6 +18,7 @@
         <telegram.starter.version>5.4.0.1</telegram.starter.version>
         <selenium.version>4.0.0</selenium.version>
         <apache.commons.version>3.11</apache.commons.version>
+        <com.vdurmont>5.1.1</com.vdurmont>
     </properties>
     <dependencies>
         <dependency>
@@ -83,6 +84,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache.commons.version}</version>
+        </dependency>
+
+        <!-- Emoji parser -->
+        <dependency>
+            <groupId>com.vdurmont</groupId>
+            <artifactId>emoji-java</artifactId>
+            <version>${com.vdurmont}</version>
         </dependency>
 
     </dependencies>

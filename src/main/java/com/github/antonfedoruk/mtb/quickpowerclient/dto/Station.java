@@ -15,8 +15,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Station {
     Integer id;
-    String location;
     String name;
+    String address;
     StationModel model;
     StationFirmware firmware;
     StationStatus stationStatus;
