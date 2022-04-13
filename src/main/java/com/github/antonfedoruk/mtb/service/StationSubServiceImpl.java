@@ -43,4 +43,14 @@ public class StationSubServiceImpl implements StationSubService {
         }
         return stationSubRepository.save(stationSub);
     }
+
+    @Override
+    public StationSub save(StationSub stationSub) {
+        return stationSubRepository.save(stationSub);
+    }
+
+    @Override
+    public Optional<StationSub> findById(Integer id) {
+        return stationSubRepository.findById(id);
+    }
 }

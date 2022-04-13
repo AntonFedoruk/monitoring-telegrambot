@@ -2,6 +2,7 @@ package com.github.antonfedoruk.mtb.repository.entity;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tg_user")
+@EqualsAndHashCode(exclude ="stationSubs")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TelegramUser {
     @Id

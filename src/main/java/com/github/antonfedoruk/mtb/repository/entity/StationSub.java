@@ -18,7 +18,7 @@ import static java.util.Objects.isNull;
 @Data
 @Entity
 @Table(name = "station_sub")
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StationSub {
     @Id
