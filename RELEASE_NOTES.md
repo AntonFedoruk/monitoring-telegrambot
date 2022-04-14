@@ -1,5 +1,8 @@
 #Release Notes
 
+## 0.6.0-SNAPSHOT
+*   Added the ability to delete station subscription.
+
 ## 0.5.0-SNAPSHOT
 *   Added the ability to see a list of subscriptions.
 *   Added the ability to subscribe on station monitoring.
