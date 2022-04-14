@@ -2,9 +2,7 @@ package com.github.antonfedoruk.mtb.command;
 
 import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageService;
-
 import com.github.antonfedoruk.mtb.service.StationSubService;
-
 import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import com.google.common.collect.ImmutableMap;
 import lombok.AccessLevel;
@@ -30,6 +28,7 @@ public class CommandContainer {
                 .put(STAT.getCommandName(), new StatCommand(sendBotMessageService, telegramUserService))
                 .put(ADD_STATION_SUB.getCommandName(), new AddStationSubCommand(sendBotMessageService, quickpowerStationClient, stationSubService))
                 .put(LIST_STATION_SUB.getCommandName(), new ListStationSubCommand(sendBotMessageService, telegramUserService))
+                .put(DELETE_STATION_SUB.getCommandName(), new DeleteStationSubCommand(sendBotMessageService, telegramUserService, stationSubService))
                 .build();
 
         unknownCommand = new UnknownCommand(sendBotMessageService);
