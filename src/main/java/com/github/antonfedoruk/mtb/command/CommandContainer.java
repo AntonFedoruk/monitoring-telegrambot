@@ -1,5 +1,6 @@
 package com.github.antonfedoruk.mtb.command;
 
+import com.github.antonfedoruk.mtb.command.annotation.AdminCommand;
 import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageService;
 import com.github.antonfedoruk.mtb.service.StationSubService;
@@ -8,7 +9,10 @@ import com.google.common.collect.ImmutableMap;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 import static com.github.antonfedoruk.mtb.command.CommandName.*;
+import static java.util.Objects.nonNull;
 
 /**
  * Container of the {@link Command}s, which are using for handling telegram commands.
@@ -17,9 +21,12 @@ import static com.github.antonfedoruk.mtb.command.CommandName.*;
 public class CommandContainer {
     final ImmutableMap<String, Command> commandMap;
     final Command unknownCommand;
+    final List<String> admins;
 
     public CommandContainer(SendBotMessageService sendBotMessageService, TelegramUserService telegramUserService,
-                            QuickpowerStationClient quickpowerStationClient, StationSubService stationSubService) {
+                            QuickpowerStationClient quickpowerStationClient, StationSubService stationSubService,
+                            List<String> admins) {
+        this.admins = admins;
         commandMap = ImmutableMap.<String, Command>builder()
                 .put(START.getCommandName(), new StartCommand(sendBotMessageService, telegramUserService))
                 .put(STOP.getCommandName(), new StopCommand(sendBotMessageService, telegramUserService))
@@ -34,7 +41,18 @@ public class CommandContainer {
         unknownCommand = new UnknownCommand(sendBotMessageService);
     }
 
-    public Command retrieveCommand(String commandIdentifier) {
-        return commandMap.getOrDefault(commandIdentifier, unknownCommand);
+    public Command retrieveCommand(String commandIdentifier, String username) {
+        Command orDefault = commandMap.getOrDefault(commandIdentifier, unknownCommand);
+        if (isAdminCommand(orDefault))
+            if (admins.contains(username)) {
+                return orDefault;
+            } else {
+                return unknownCommand;
+            }
+        return orDefault;
+    }
+
+    private boolean isAdminCommand(Command command) {
+        return nonNull(command.getClass().getAnnotation(AdminCommand.class));
     }
 }
