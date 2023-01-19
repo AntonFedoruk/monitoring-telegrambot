@@ -19,6 +19,7 @@ public enum CommandName {
     ADD_STATION_SUB("/addstationsub"),
     LIST_STATION_SUB("/liststationsub"),
     DELETE_STATION_SUB("/deletestationsub"),
+    ADMIN_HELP("/ahelp"),
     NO("");
 
     final String commandName;
