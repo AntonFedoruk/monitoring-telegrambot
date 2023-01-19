@@ -22,11 +22,10 @@ public class HelpCommand implements Command {
                     + "%s - відписатись від моніторингу станцій\n"
                     + "%s - відобразити список підписок на моніторинг\n\n"
 
-                    + "%s - отримати допомогу в роботі зі мною\n"
-                    + "%s - показати кількість активних користувачів\n",
+                    + "%s - отримати допомогу в роботі зі мною.\n",
             START.getCommandName(), STOP.getCommandName(), ADD_STATION_SUB.getCommandName(),
             DELETE_STATION_SUB.getCommandName(), LIST_STATION_SUB.getCommandName(),
-            HELP.getCommandName(), STAT.getCommandName());
+            HELP.getCommandName());
 
     // DO NOT USE @Autowired to get 'sendBotMessageService' bean from Application Context, to avoid circle dependency.
     public HelpCommand(SendBotMessageService sendBotMessageService) {
