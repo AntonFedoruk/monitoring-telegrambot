@@ -1,4 +1,6 @@
 #Release Notes
+## 0.8.1-SNAPSHOT
+*   Extend bot statistics for admins.
 
 ## 0.8.0-SNAPSHOT
 *   Added AdminCommand annotation and AdminHelpCommand.

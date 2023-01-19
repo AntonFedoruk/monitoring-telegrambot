@@ -4,6 +4,7 @@ import com.github.antonfedoruk.mtb.command.CommandContainer;
 import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageServiceImpl;
 import com.github.antonfedoruk.mtb.service.StationSubService;
+import com.github.antonfedoruk.mtb.service.StatisticService;
 import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -37,8 +38,9 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
     public MonitoringTelegramBot(TelegramUserService telegramUserService,
                                  QuickpowerStationClient quickpowerStationClient,
                                  StationSubService stationSubService,
+                                 StatisticService statisticService,
                                  @Value("#{'${telegrambot.admins}'.split(',')}") List<String> admins) {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, quickpowerStationClient, stationSubService, admins);
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, quickpowerStationClient, stationSubService, statisticService, admins);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.github.antonfedoruk.mtb.command.annotation.AdminCommand;
 import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageService;
 import com.github.antonfedoruk.mtb.service.StationSubService;
+import com.github.antonfedoruk.mtb.service.StatisticService;
 import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import com.google.common.collect.ImmutableMap;
 import lombok.AccessLevel;
@@ -25,6 +26,7 @@ public class CommandContainer {
 
     public CommandContainer(SendBotMessageService sendBotMessageService, TelegramUserService telegramUserService,
                             QuickpowerStationClient quickpowerStationClient, StationSubService stationSubService,
+                            StatisticService statisticService,
                             List<String> admins) {
         this.admins = admins;
         commandMap = ImmutableMap.<String, Command>builder()
@@ -32,7 +34,7 @@ public class CommandContainer {
                 .put(STOP.getCommandName(), new StopCommand(sendBotMessageService, telegramUserService))
                 .put(HELP.getCommandName(), new HelpCommand(sendBotMessageService))
                 .put(NO.getCommandName(), new NoCommand(sendBotMessageService))
-                .put(STAT.getCommandName(), new StatCommand(sendBotMessageService, telegramUserService))
+                .put(STAT.getCommandName(), new StatCommand(sendBotMessageService, statisticService))
                 .put(ADD_STATION_SUB.getCommandName(), new AddStationSubCommand(sendBotMessageService, quickpowerStationClient, stationSubService))
                 .put(LIST_STATION_SUB.getCommandName(), new ListStationSubCommand(sendBotMessageService, telegramUserService))
                 .put(DELETE_STATION_SUB.getCommandName(), new DeleteStationSubCommand(sendBotMessageService, telegramUserService, stationSubService))
