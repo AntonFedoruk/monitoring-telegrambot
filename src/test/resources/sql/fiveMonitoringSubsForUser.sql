@@ -1,15 +1,14 @@
 INSERT INTO tg_user
 VALUES (1, 1);
 
+INSERT INTO station_sub
+VALUES (1, 'g1', 'ONLINE'),
+       (2, 'g2', 'ONLINE'),
+       (3, 'g3', 'OFFLINE'),
+       (4, 'g4', 'CHARGING'),
+       (5, 'g5', 'CHARGING');
 
-INSERT INTO monitoring_sub
-VALUES (1, 'g1', 1),
-       (2, 'g2', 2),
-       (3, 'g3', 3),
-       (4, 'g4', 4),
-       (5, 'g5', 5);
-
-INSERT INTO monitoring_x_user
+INSERT INTO station_x_user
 VALUES (1, 1),
        (2, 1),
        (3, 1),

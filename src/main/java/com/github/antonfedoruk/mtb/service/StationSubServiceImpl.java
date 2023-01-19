@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.NotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +41,7 @@ public class StationSubServiceImpl implements StationSubService {
             stationSub.addUser(telegramUser);
             stationSub.setId(station.getId());
             stationSub.setTitle(station.getName());
+            stationSub.setLastStatus(station.getStationStatus());
         }
         return stationSubRepository.save(stationSub);
     }
@@ -52,5 +54,10 @@ public class StationSubServiceImpl implements StationSubService {
     @Override
     public Optional<StationSub> findById(Integer id) {
         return stationSubRepository.findById(id);
+    }
+
+    @Override
+    public List<StationSub> findAll() {
+        return stationSubRepository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package com.github.antonfedoruk.mtb.repository;
 
+import com.github.antonfedoruk.mtb.quickpowerclient.dto.StationStatus;
 import com.github.antonfedoruk.mtb.repository.entity.StationSub;
 import com.github.antonfedoruk.mtb.repository.entity.TelegramUser;
 import org.junit.jupiter.api.Assertions;
@@ -69,7 +70,7 @@ class TelegramUserRepositoryIT {
         for (int i = 0; i < stationSubs.size(); i++) {
             Assertions.assertEquals(String.format("g%s", (i + 1)), stationSubs.get(i).getTitle());
             Assertions.assertEquals(i + 1, stationSubs.get(i).getId());
-            Assertions.assertEquals(i + 1, stationSubs.get(i).getLastUpdateId());
+            Assertions.assertEquals(true, stationSubs.get(i).getLastStatus()!= StationStatus.ERROR);
         }
     }
 }
