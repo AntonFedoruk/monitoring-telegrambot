@@ -1,5 +1,6 @@
 package com.github.antonfedoruk.mtb.repository.entity;
 
+import com.github.antonfedoruk.mtb.quickpowerclient.dto.StationStatus;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,8 +28,11 @@ public class StationSub {
     @Column(name = "title")
     String title;
 
-    @Column(name = "last_update_id")
-    Integer lastUpdateId;
+    @Column(name = "last_status", columnDefinition = "ENUM('ONLINE', 'OFFLINE', 'CHARGING', 'ERROR') NOT NULL")
+    //  @Enumerated(EnumType.STRING) - to declare that its value should be converted from what is effectively a String
+    // (JPA will use the Enum.name() value when storing an entity) in the database to the StationStatus type.
+    @Enumerated(EnumType.STRING)
+    StationStatus lastStatus;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

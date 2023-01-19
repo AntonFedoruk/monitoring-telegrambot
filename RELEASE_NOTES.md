@@ -1,5 +1,9 @@
 #Release Notes
 
+## 0.7.0-SNAPSHOT
+*   Implement the scheduling of checking the status of the stations.
+*   Added subscribers' notification about changing station statuses.
+
 ## 0.6.0-SNAPSHOT
 *   Added the ability to delete station subscription.
 
