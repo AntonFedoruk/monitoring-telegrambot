@@ -1,5 +1,8 @@
 #Release Notes
 
+## 0.8.0-SNAPSHOT
+*   Added AdminCommand annotation and AdminHelpCommand.
+
 ## 0.7.0-SNAPSHOT
 *   Implement the scheduling of checking the status of the stations.
 *   Added subscribers' notification about changing station statuses.
