@@ -1,4 +1,14 @@
 #Release Notes
+
+## 1.0.0
+Implemented all the logic, planned up to MVP:
+*   User can subscribe on station monitoring
+*   User can view list of station subscriptions on which user subscribes
+*   User can unsubscribe from station monitoring
+*   User can set an inactive bot and do not receive notifications
+*   User can restart getting notifications
+*   Admin has ability to see bot statistics
+
 ## 0.8.1-SNAPSHOT
 *   Extend bot statistics for admins.
 

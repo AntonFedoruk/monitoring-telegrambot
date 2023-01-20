@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.github.antonfedoruk</groupId>
     <artifactId>monitoring-telegrambot</artifactId>
-    <version>0.8.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Monitoring Telegram Bot</name>
-    <description>Telegram bot for sites monitoring</description>
+    <description>Telegram bot for QuickPower monitoring</description>
     <properties>
         <java.version>11</java.version>
         <telegram.starter.version>5.4.0.1</telegram.starter.version>
