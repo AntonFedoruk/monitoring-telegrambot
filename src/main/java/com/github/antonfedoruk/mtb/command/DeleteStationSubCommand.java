@@ -42,7 +42,7 @@ public class DeleteStationSubCommand implements Command {
             return;
         }
         String stationId = getMessage(update).split(SPACE)[1];
-        String chatId = getChatId(update);
+        Long chatId = getChatId(update);
         if (isNumeric(stationId)) {
             Optional<StationSub> optionalStationSub = stationSubService.findById(Integer.valueOf(stationId));
             if (optionalStationSub.isPresent()) {
@@ -60,7 +60,7 @@ public class DeleteStationSubCommand implements Command {
         }
     }
 
-    private void sendStationIdList(String chatId) {
+    private void sendStationIdList(Long chatId) {
         String message;
         List<StationSub> stationSubs = telegramUserService.findByChatId(chatId)
                 .orElseThrow(NotFoundException::new)

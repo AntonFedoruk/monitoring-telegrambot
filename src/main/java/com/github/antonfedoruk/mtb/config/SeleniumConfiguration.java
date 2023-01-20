@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-/*
+/**
  * Basic Selenium configuration.
  */
 @Configuration

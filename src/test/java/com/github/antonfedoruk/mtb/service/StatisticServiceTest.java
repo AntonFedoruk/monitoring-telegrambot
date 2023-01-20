@@ -32,7 +32,7 @@ public class StatisticServiceTest {
         Mockito.when(telegramUserService.findAllInActiveUsers()).thenReturn(singletonList(new TelegramUser()));
         TelegramUser activeUser = new TelegramUser();
         activeUser.setStationSubs(singletonList(new StationSub()));
-        Mockito.when(telegramUserService.retrieveAllActiveUsers()).thenReturn(singletonList(activeUser));
+        Mockito.when(telegramUserService.findAllActiveUsers()).thenReturn(singletonList(activeUser));
         StationSub stationSub = new StationSub();
         stationSub.setId(1);
         stationSub.setTitle("station");

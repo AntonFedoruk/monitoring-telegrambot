@@ -12,9 +12,10 @@ import java.util.List;
 @PropertySource("classpath:application.properties ")
 @DisplayName("Unit-level testing for successful login.")
 public class LoginTest {
-    private String login = ApplicationProperties.getProperty("quickpower.login.value");
-    private String password = ApplicationProperties.getProperty("quickpower.password.value");
-    private String url = ApplicationProperties.getProperty("quickpower.url");
+    private final String login = ApplicationProperties.getProperty("quickpower.login.value");
+    private final String password = ApplicationProperties.getProperty("quickpower.password.value");
+    private final String url = ApplicationProperties.getProperty("quickpower.url");
+    private final String chromeDriversLocaion = ApplicationProperties.getProperty("selenium.chromedriver.location");
 
     public static LoginPage loginPage;
     public static StationsPage stationsPage;
@@ -22,7 +23,7 @@ public class LoginTest {
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "/home/anton/chromedrivers/chromedriver_97_linux64/chromedriver");
+        System.setProperty("webdriver.chrome.driver", chromeDriversLocaion);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

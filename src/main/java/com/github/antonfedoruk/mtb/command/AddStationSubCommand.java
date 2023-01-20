@@ -38,7 +38,7 @@ public class AddStationSubCommand implements Command {
             return;
         }
         String stationId = getMessage(update).split(SPACE)[1];
-        String chatId = getChatId(update);
+        Long chatId = getChatId(update);
         if (isNumeric(stationId)) {
             Station stationById = quickpowerStationClient.getStationById(Integer.parseInt(stationId));
             System.out.println("Trying to subscribe on " + stationById.getName());
@@ -52,12 +52,12 @@ public class AddStationSubCommand implements Command {
         }
     }
 
-    private void sendStationNotFound(String chatId, String stationId) {
+    private void sendStationNotFound(Long chatId, String stationId) {
         String stationNotFoundMessage = "Відсутня станція з ID = \"%s\"";
         sendBotMessageService.sendMessage(chatId, String.format( stationNotFoundMessage, stationId));
     }
 
-    private void sendStationIdList(String chatId) {
+    private void sendStationIdList(Long chatId) {
         String stationIds = quickpowerStationClient.getStationList().stream()
                 .map(station -> String.format("%s - '%s' \n", station.getName(), station.getId()))
                 .collect(Collectors.joining());

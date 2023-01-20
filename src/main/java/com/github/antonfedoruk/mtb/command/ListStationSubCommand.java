@@ -7,11 +7,9 @@ import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import javax.ws.rs.NotFoundException;
-
 import java.util.stream.Collectors;
 
 import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
-import static com.github.antonfedoruk.mtb.command.CommandUtils.getMessage;
 
 /**
  * {@link Command} for getting list of {@link StationSub}
@@ -24,7 +22,6 @@ public class ListStationSubCommand implements Command {
         this.sendBotMessageService = sendBotMessageService;
         this.telegramUserService = telegramUserService;
     }
-
 
     @Override
     public void execute(Update update) {

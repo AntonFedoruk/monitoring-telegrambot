@@ -8,6 +8,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.stream.Collectors;
 
+import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
+
 @AdminCommand
 public class StatCommand implements Command {
     private final StatisticService statisticService;
@@ -29,8 +31,7 @@ public class StatCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        String chatId = update.getMessage().getChatId().toString();
-
+        Long chatId = getChatId(update);
         StatisticDTO statisticDTO = statisticService.countBotStatistic();
 
         String collectedStations = statisticDTO.getStationStatDTOs().stream()

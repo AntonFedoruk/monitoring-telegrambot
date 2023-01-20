@@ -41,14 +41,14 @@ class DeleteStationSubCommandTest {
         Long chatId = 123L;
         Update update = prepareUpdate(chatId, DELETE_STATION_SUB.getCommandName());
 
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(new TelegramUser()));
 
         String expectedMessage = "Поки відсутній моніторинг станцій. Щоб почати відслідковування станцій скористайся /addstationsub";
         // when
         command.execute(update);
         // then
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -62,7 +62,7 @@ class DeleteStationSubCommandTest {
         ss1.setId(111);
         ss1.setTitle("SS1 title");
         telegramUser.setStationSubs(Collections.singletonList(ss1));
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(telegramUser));
 
         String expectedMessage = "Для видалення моніторингу станції - передай комадну разом з ID станції.\n" +
@@ -73,7 +73,7 @@ class DeleteStationSubCommandTest {
         // when
         command.execute(update);
         // then
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -87,7 +87,7 @@ class DeleteStationSubCommandTest {
         ss1.setId(111);
         ss1.setTitle("SS1 title");
         telegramUser.setStationSubs(Collections.singletonList(ss1));
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId)))
+        Mockito.when(telegramUserService.findByChatId(chatId))
                 .thenReturn(Optional.of(telegramUser));
 
         String expectedMessage = "Невірний формат ID станції.\n" +
@@ -95,7 +95,7 @@ class DeleteStationSubCommandTest {
         // when
         command.execute(update);
         // then
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
     
     @Test
@@ -110,13 +110,13 @@ class DeleteStationSubCommandTest {
         ss1.setId(111);
         ss1.setTitle("SS1 title");
         TelegramUser telegramUser = new TelegramUser();
-        telegramUser.setChatId(chatId.toString());
+        telegramUser.setChatId(chatId);
         telegramUser.setStationSubs(Collections.singletonList(ss1));
         ArrayList<TelegramUser> users = new ArrayList<>();
         users.add(telegramUser);
         ss1.setUsers(users);
         Mockito.when(stationSubService.findById(stationId)).thenReturn(Optional.of(ss1));
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(chatId))).thenReturn(Optional.of(telegramUser));
+        Mockito.when(telegramUserService.findByChatId(chatId)).thenReturn(Optional.of(telegramUser));
 
         String expectedMessage = "Скасовано підписку на станцію: SS1 title";
         // when
@@ -124,7 +124,7 @@ class DeleteStationSubCommandTest {
         // then
         users.remove(telegramUser);
         Mockito.verify(stationSubService).save(ss1);
-        Mockito.verify(sendBotMessageService).sendMessage(chatId.toString(), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 
     @Test
@@ -142,6 +142,6 @@ class DeleteStationSubCommandTest {
         command.execute(update);
         // then
         Mockito.verify(stationSubService).findById(stationId);
-        Mockito.verify(sendBotMessageService).sendMessage(String.valueOf(chatId), expectedMessage);
+        Mockito.verify(sendBotMessageService).sendMessage(chatId, expectedMessage);
     }
 }

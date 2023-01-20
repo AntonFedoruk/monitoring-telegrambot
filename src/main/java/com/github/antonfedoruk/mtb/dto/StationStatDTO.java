@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
  * DTO for showing group id and title without data.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"title", "activeUserCount"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StationStatDTO {
     final Integer id;

@@ -42,7 +42,7 @@ class CommandContainerTest {
         // when-then
         Arrays.stream(CommandName.values())
                 .forEach(commandName -> {
-                    Command command = commandContainer.retrieveCommand(commandName.getCommandName(), "admin");
+                    Command command = commandContainer.findCommand(commandName.getCommandName(), "admin");
                     Assertions.assertNotEquals(UnknownCommand.class, command.getClass());
                 });
     }
@@ -53,7 +53,7 @@ class CommandContainerTest {
         // given
         String unknownCommand = "/asd";
         // when
-        Command command = commandContainer.retrieveCommand(unknownCommand, "username");
+        Command command = commandContainer.findCommand(unknownCommand, "username");
         // then
         Assertions.assertEquals(UnknownCommand.class, command.getClass());
     }

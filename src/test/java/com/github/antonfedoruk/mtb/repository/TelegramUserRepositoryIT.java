@@ -15,7 +15,6 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 /**
@@ -47,7 +46,7 @@ class TelegramUserRepositoryIT {
     void shouldProperlySaveTelegramUser() {
         // given
         TelegramUser telegramUser = new TelegramUser();
-        telegramUser.setChatId("88888888");
+        telegramUser.setChatId(22L);
         telegramUser.setActive(false);
         telegramUserRepository.save(telegramUser);
         // when
@@ -62,7 +61,7 @@ class TelegramUserRepositoryIT {
     @DisplayName("Should properly get all monitoring subscriptions for user")
     void shouldProperlyGetAllMonitoringSubscriptionsForUser() {
         // when
-        Optional<TelegramUser> userFromDB = telegramUserRepository.findById("1");
+        Optional<TelegramUser> userFromDB = telegramUserRepository.findById(1L);
 
         // then
         Assertions.assertTrue(userFromDB.isPresent());
@@ -70,7 +69,7 @@ class TelegramUserRepositoryIT {
         for (int i = 0; i < stationSubs.size(); i++) {
             Assertions.assertEquals(String.format("g%s", (i + 1)), stationSubs.get(i).getTitle());
             Assertions.assertEquals(i + 1, stationSubs.get(i).getId());
-            Assertions.assertEquals(true, stationSubs.get(i).getLastStatus()!= StationStatus.ERROR);
+            Assertions.assertNotSame(stationSubs.get(i).getLastStatus(), StationStatus.ERROR);
         }
     }
 }

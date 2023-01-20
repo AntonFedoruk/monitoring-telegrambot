@@ -30,7 +30,7 @@ public class StatisticServiceImpl implements StatisticService {
                 .map(stationSub -> new StationStatDTO(stationSub.getId(), stationSub.getTitle(),stationSub.getUsers().size()))
                 .collect(Collectors.toList());
         List<TelegramUser> allInActiveUsers = telegramUserService.findAllInActiveUsers();
-        List<TelegramUser> allActiveUsers = telegramUserService.retrieveAllActiveUsers();
+        List<TelegramUser> allActiveUsers = telegramUserService.findAllActiveUsers();
 
         double stationsPerUser = getStationPerUser(allActiveUsers);
         return new StatisticDTO(allActiveUsers.size(), allInActiveUsers.size(), stationStatDTOs, stationsPerUser);
