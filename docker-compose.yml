@@ -5,7 +5,7 @@ version: '3.1'
 services:
   mtb:
     depends_on:
-      - 'mtb-db'
+      - mtb-db
     build:
       context: .
     # Cекция environment: отвечает за то, чтобы мы передали в Dockerfile необходимые переменные среды (environment variables).

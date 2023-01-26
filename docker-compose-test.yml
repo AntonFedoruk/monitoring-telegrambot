@@ -2,7 +2,7 @@ version: '3.1'
 
 #В docker-compose-test.yml будет запускаться только база данных с собственными настройками.
 services:
-  mtb-db:
+  mtb-db-dev:
     image: mysql:5.7
     restart: always
     environment:
