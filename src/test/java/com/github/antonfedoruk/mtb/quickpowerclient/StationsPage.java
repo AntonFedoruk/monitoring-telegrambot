@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-/*
+/**
  *  Implementation of a Page Object pattern, that contains station elements and methods for interacting with those elements.
  */
 public class StationsPage {

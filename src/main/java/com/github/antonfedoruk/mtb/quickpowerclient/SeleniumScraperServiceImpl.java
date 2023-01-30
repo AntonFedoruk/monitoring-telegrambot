@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,11 +34,11 @@ public class SeleniumScraperServiceImpl implements ScraperService {
     private boolean isLogged = false;
 
     //WebDriver represents the browser
-    private final ChromeDriver driver;
+    private final RemoteWebDriver driver;
 
     private WebDriverWait wait; // Explicit wait(JS should load a response to the page)
 
-    public SeleniumScraperServiceImpl(ChromeDriver driver) {
+    public SeleniumScraperServiceImpl(RemoteWebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }

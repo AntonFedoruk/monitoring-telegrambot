@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/*
+/**
  *  Implementation of a Page Object pattern, that contains the location of login page elements and methods for interacting with those elements.
- * */
+ */
 public class LoginPage {
     public WebDriver driver;
 
