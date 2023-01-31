@@ -7,6 +7,7 @@ import com.github.antonfedoruk.mtb.service.SendBotMessageService;
 import com.github.antonfedoruk.mtb.service.StationSubService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static com.github.antonfedoruk.mtb.command.CommandName.ADD_STATION_SUB;
@@ -40,13 +41,18 @@ public class AddStationSubCommand implements Command {
         String stationId = getMessage(update).split(SPACE)[1];
         Long chatId = getChatId(update);
         if (isNumeric(stationId)) {
-            Station stationById = quickpowerStationClient.getStationById(Integer.parseInt(stationId));
+            try {
+                Station stationById = quickpowerStationClient.getStationByIdOrThrowNoSuchElementException(Integer.parseInt(stationId));
+
             System.out.println("Trying to subscribe on " + stationById.getName());
             if (isNull(stationById.getId())) {
                 sendStationNotFound(chatId, stationId);
             }
             StationSub savedStationSub = stationSubService.save(chatId, stationById);
             sendBotMessageService.sendMessage(chatId, "Підписано на моніторинг станції " + savedStationSub.getTitle().toUpperCase());
+            } catch (NoSuchElementException e) {
+                sendBotMessageService.sendMessage(chatId, e.getMessage());
+            }
         } else {
             sendStationNotFound(chatId, stationId);
         }

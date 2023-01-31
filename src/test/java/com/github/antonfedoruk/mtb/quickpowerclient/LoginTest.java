@@ -43,6 +43,7 @@ public class LoginTest {
     @Test
     @DisplayName("Should successfully log in")
     public void shouldSuccessfullyLogInUsingCredentialsFromPropertiesAndShowStationList() {
+        System.out.println("login: " + login);
         loginPage.inputLogin(login);
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();
