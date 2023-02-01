@@ -1,13 +1,10 @@
 package com.github.antonfedoruk.mtb.quickpowerclient;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.ImmutableCapabilities;
-import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.net.MalformedURLException;
 import java.net.URL;
