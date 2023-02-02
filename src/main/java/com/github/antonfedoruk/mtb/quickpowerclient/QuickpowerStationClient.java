@@ -3,6 +3,7 @@ package com.github.antonfedoruk.mtb.quickpowerclient;
 import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Quickpower client corresponds to stations.
@@ -22,5 +23,5 @@ public interface QuickpowerStationClient {
      * @param id provided ID.
      * @return {@link Station} object.
      */
-    Station getStationById(Integer id);
+    Station getStationByIdOrThrowNoSuchElementException (Integer id) throws NoSuchElementException;
 }

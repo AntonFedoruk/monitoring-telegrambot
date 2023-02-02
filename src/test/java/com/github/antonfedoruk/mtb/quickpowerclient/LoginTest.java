@@ -3,7 +3,6 @@ package com.github.antonfedoruk.mtb.quickpowerclient;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.PropertySource;
@@ -43,6 +42,7 @@ public class LoginTest {
     @Test
     @DisplayName("Should successfully log in")
     public void shouldSuccessfullyLogInUsingCredentialsFromPropertiesAndShowStationList() {
+        System.out.println("login: " + login);
         loginPage.inputLogin(login);
         loginPage.inputPassword(password);
         loginPage.clickLoginBtn();

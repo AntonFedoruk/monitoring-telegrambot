@@ -14,6 +14,8 @@ services:
       BOT_TOKEN: '${BOT_TOKEN}'
       BOT_DB_USERNAME: '${BOT_DB_USERNAME}'
       BOT_DB_PASSWORD: '${BOT_DB_PASSWORD}'
+      QP_LOGIN: '${QP_LOGIN}'
+      QP_PASSWORD: '${QP_PASSWORD}'
     restart: always
 
   # DB
@@ -33,7 +35,7 @@ services:
   # Selenium-Chrome
   selenium-chrome:
     image: selenium/standalone-chrome
-    container_name: selenium-standalone-chrome
+#    container_name: selenium-standalone-chrome
     shm_size: 2gb
     ports:
       - '4444:4444'

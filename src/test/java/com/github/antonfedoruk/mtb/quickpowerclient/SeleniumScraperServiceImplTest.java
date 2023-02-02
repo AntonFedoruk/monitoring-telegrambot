@@ -2,7 +2,6 @@ package com.github.antonfedoruk.mtb.quickpowerclient;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.PropertySource;
@@ -12,7 +11,7 @@ import java.net.URL;
 import java.time.Duration;
 
 @PropertySource("classpath:application.properties ")
-@DisplayName("Integration-level testing for JavaRushGroupClientImplTest")
+@DisplayName("Integration-level testing for SeleniumScraperServiceImpl")
 class SeleniumScraperServiceImplTest {
 
     private final String login = ApplicationProperties.getProperty("quickpower.login.value");
@@ -21,7 +20,6 @@ class SeleniumScraperServiceImplTest {
     private final String chromedriverServerUrl = ApplicationProperties.getProperty("selenium.chromedriver.server.url");
 
     public static LoginPage loginPage;
-//    public static StationsPage stationsPage;
     public static WebDriver driver;
 
     private ScraperService scraperService;
@@ -42,13 +40,21 @@ class SeleniumScraperServiceImplTest {
         seleniumScraperService.setQuickpowerUrl(url);
         seleniumScraperService.setLogin(login);
         seleniumScraperService.setPassword(password);
+
         scraperService = seleniumScraperService;
+
         loginPage = new LoginPage(driver);
     }
 
+//    @Test
+//    @DisplayName("Verify the connection to the remote webdriver.")
+//    void verifyTheConnectionToTheRemoteWebdriver(){
+//        Assertions.assertDoesNotThrow(() -> driver = new RemoteWebDriver(new URL(chromedriverServerUrl), new ImmutableCapabilities("browserName", "chrome")));
+//    }
+
     @Test
-    @DisplayName("Should properly get station count")
-    void shouldProperlyGetStationCount() {
+    @DisplayName("Check if ScraperService see all stations")
+    void checkIfScraperServiceSeeAllStations() {
         // given when
         int stationCount = scraperService.extractStations().size();
         // then

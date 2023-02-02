@@ -4,6 +4,7 @@ import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Implementation of the {@link QuickpowerStationClient} interface.
@@ -22,7 +23,8 @@ public class QuickpowerStationClientImpl implements QuickpowerStationClient {
     }
 
     @Override
-    public Station getStationById(Integer id) {
-        return scraperService.extractStations().stream().filter(station -> id.equals(station.getId())).findFirst().get();
+    public Station getStationByIdOrThrowNoSuchElementException(Integer id) {
+        return scraperService.extractStations().stream().filter(station -> id.equals(station.getId())).findFirst()
+                .orElseThrow(() -> new NoSuchElementException("Не можу знайти станцію з таким ID."));
     }
 }

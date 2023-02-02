@@ -93,7 +93,12 @@ public class ScraperTest {
 //        for (WebElement location : chargeLocations) {
 //            System.out.println(location.findElement(By.xpath("(//span)[2]")).getText());
 //        }
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
-//        driver.quit();
+        driver.quit();
     }
 }

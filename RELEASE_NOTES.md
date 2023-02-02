@@ -1,4 +1,6 @@
 #Release Notes
+## 1.1.0
+* Fixed correct implementation of Selenium RemoteWebDriver in Docker.
 
 ## 1.0.0
 Implemented all the logic, planned up to MVP:
