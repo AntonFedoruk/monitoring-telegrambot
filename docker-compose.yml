@@ -1,30 +1,40 @@
-# Это версия docker-compose.
 version: '3.1'
 
-#services: говорит о том, что все следующие строки после этого (будут сдвинуты) — относятся к сервисам, которые мы настраиваем.
 services:
   mtb:
     depends_on:
-      - 'mtb-db'
+      - mtb-db
+      - selenium-chrome
     build:
       context: .
     # Cекция environment: отвечает за то, чтобы мы передали в Dockerfile необходимые переменные среды (environment variables).
     # Как раз то, что нам и нужно. Поэтому ниже мы переменные и передаем. Их docker-compose будет искать в переменных операционной среды сервера. Добавим их в баш скрипте.
     environment:
-      BOT_NAME: ${BOT_NAME}
-      BOT_TOKEN: ${BOT_TOKEN}
-      BOT_DB_USERNAME: ${BOT_DB_USERNAME}
-      BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
+      BOT_NAME: '${BOT_NAME}'
+      BOT_TOKEN: '${BOT_TOKEN}'
+      BOT_DB_USERNAME: '${BOT_DB_USERNAME}'
+      BOT_DB_PASSWORD: '${BOT_DB_PASSWORD}'
     restart: always
+
+  # DB
   mtb-db:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_USER: ${BOT_DB_USERNAME}
-      MYSQL_PASSWORD: ${BOT_DB_PASSWORD}
+      MYSQL_USER: '${BOT_DB_USERNAME}'
+      MYSQL_PASSWORD: '${BOT_DB_PASSWORD}'
       MYSQL_DATABASE: 'mtb_db'
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - '3306:3306'
     expose:
       - '3306'
+
+  # Selenium-Chrome
+  selenium-chrome:
+    image: selenium/standalone-chrome
+    container_name: selenium-standalone-chrome
+    shm_size: 2gb
+    ports:
+      - '4444:4444'
+      - '7900:7900'

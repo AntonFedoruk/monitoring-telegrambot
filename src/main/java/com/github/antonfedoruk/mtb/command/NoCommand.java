@@ -3,6 +3,8 @@ package com.github.antonfedoruk.mtb.command;
 import com.github.antonfedoruk.mtb.service.SendBotMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
+
 /**
  * No {@link Command}.
  */
@@ -18,6 +20,6 @@ public class NoCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        this.sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), NO_MESSAGE);
+        this.sendBotMessageService.sendMessage(getChatId(update), NO_MESSAGE);
     }
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Pull new changes
-git pull
+#git pull
 
 # Add environment variables for Maven
 export TG_MTB_USERNAME=$1
@@ -10,8 +10,8 @@ export TG_MTB_DB_USERNAME='mtb_db_user'
 export TG_MTB_DB_PASSWORD='mtb_db_password'
 
 # Prepare Jar
-#mvn clean
-#mvn package
+mvn clean
+mvn package
 
 # Ensure, that docker-compose stopped
 docker-compose stop

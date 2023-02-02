@@ -1,8 +1,9 @@
 version: '3.1'
 
-#В docker-compose-test.yml будет запускаться только база данных с собственными настройками.
 services:
-  mtb-db:
+
+  #DB
+  mtb-db-dev:
     image: mysql:5.7
     restart: always
     environment:
@@ -14,3 +15,12 @@ services:
       - '3306:3306'
     expose:
       - '3306'
+
+  # Selenium-Chrome
+  selenium-dev:
+      image: selenium/standalone-chrome
+      container_name: selenium-standalone-chrome-dev
+      shm_size: 2gb
+      ports:
+        - '4444:4444'
+        - '7900:7900'

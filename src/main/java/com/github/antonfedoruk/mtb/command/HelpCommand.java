@@ -4,6 +4,7 @@ import com.github.antonfedoruk.mtb.service.SendBotMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static com.github.antonfedoruk.mtb.command.CommandName.*;
+import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
 
 /**
  * Help {@link Command}.
@@ -34,6 +35,6 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        this.sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), HELP_MESSAGE);
+        this.sendBotMessageService.sendMessage(getChatId(update), HELP_MESSAGE);
     }
 }

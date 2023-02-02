@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 public interface StationSubService {
 
-    StationSub save(String chatId, Station station);
+    StationSub save(Long chatId, Station station);
 
     StationSub save(StationSub stationSub);
 

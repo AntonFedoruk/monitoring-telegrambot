@@ -4,6 +4,7 @@ import com.github.antonfedoruk.mtb.command.CommandContainer;
 import com.github.antonfedoruk.mtb.quickpowerclient.QuickpowerStationClient;
 import com.github.antonfedoruk.mtb.service.SendBotMessageServiceImpl;
 import com.github.antonfedoruk.mtb.service.StationSubService;
+import com.github.antonfedoruk.mtb.service.StatisticService;
 import com.github.antonfedoruk.mtb.service.TelegramUserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -37,8 +38,9 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
     public MonitoringTelegramBot(TelegramUserService telegramUserService,
                                  QuickpowerStationClient quickpowerStationClient,
                                  StationSubService stationSubService,
+                                 StatisticService statisticService,
                                  @Value("#{'${telegrambot.admins}'.split(',')}") List<String> admins) {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, quickpowerStationClient, stationSubService, admins);
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, quickpowerStationClient, stationSubService, statisticService, admins);
     }
 
     @Override
@@ -48,10 +50,9 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
             String username = update.getMessage().getFrom().getUserName();
             if (message.startsWith(COMMAND_PREFIX)) {
                 String commandIdentifier = message.split(" ")[0].toLowerCase();
-
-                commandContainer.retrieveCommand(commandIdentifier, username).execute(update);
+                commandContainer.findCommand(commandIdentifier, username).execute(update);
             } else {
-                commandContainer.retrieveCommand(NO.getCommandName(), username).execute(update);
+                commandContainer.findCommand(NO.getCommandName(), username).execute(update);
             }
         }
     }

@@ -20,7 +20,7 @@ class StationSubServiceTest {
     StationSubRepository stationSubRepository;
     TelegramUser newUser;
 
-    final static String CHAT_ID = "1";
+    final static Long CHAT_ID = 1L;
 
     @BeforeEach
     public void init() {
@@ -60,7 +60,7 @@ class StationSubServiceTest {
     void shouldProperlyAddUserToExistingGroup() {
         // given
         TelegramUser oldTelegramUser = new TelegramUser();
-        oldTelegramUser.setChatId("2");
+        oldTelegramUser.setChatId(2L);
         oldTelegramUser.setActive(true);
 
         Station station = new Station();

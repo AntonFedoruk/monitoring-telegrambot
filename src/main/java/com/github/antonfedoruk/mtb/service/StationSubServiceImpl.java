@@ -23,7 +23,7 @@ public class StationSubServiceImpl implements StationSubService {
     }
 
     @Override
-    public StationSub save(String chatId, Station station) {
+    public StationSub save(Long chatId, Station station) {
         TelegramUser telegramUser = telegramUserService.findByChatId(chatId).orElseThrow(NotFoundException::new);
         //TODO add exception handling
         StationSub stationSub;
@@ -31,7 +31,7 @@ public class StationSubServiceImpl implements StationSubService {
         if (stationSubFromDB.isPresent()) {
             stationSub = stationSubFromDB.get();
             Optional<TelegramUser> first = stationSub.getUsers().stream()
-                    .filter(it -> it.getChatId().equalsIgnoreCase(chatId))
+                    .filter(it -> it.getChatId().equals(chatId))
                     .findFirst();
             if (first.isEmpty()) {
                 stationSub.addUser(telegramUser);

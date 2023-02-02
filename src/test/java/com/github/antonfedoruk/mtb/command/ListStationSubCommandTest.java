@@ -25,7 +25,7 @@ class ListStationSubCommandTest {
     void shouldProperlyShowsListStationSub() {
         // given
         TelegramUser telegramUser = new TelegramUser();
-        telegramUser.setChatId("1");
+        telegramUser.setChatId(1L);
         telegramUser.setActive(true);
 
         List<StationSub> stationSubsList = new ArrayList<>();
@@ -46,13 +46,13 @@ class ListStationSubCommandTest {
 
         Update update = new Update();
         Message message = Mockito.mock(Message.class);
-        Mockito.when(message.getChatId()).thenReturn(Long.valueOf(telegramUser.getChatId()));
+        Mockito.when(message.getChatId()).thenReturn(telegramUser.getChatId());
         Mockito.when(message.getText()).thenReturn(LIST_STATION_SUB.getCommandName());
         update.setMessage(message);
 
         String collectedStations = "Я знайшов всі підписки на моніторинг станції: \n\n" +
                 telegramUser.getStationSubs().stream()
-                        .map(it -> "Станція: " + it.getTitle() + " , ID = " + it.getId() + " \n")
+                        .map(it -> "Станція: " + it.getTitle() + " , ID = '" + it.getId() + "' \n")
                         .collect(Collectors.joining());
         // when
         command.execute(update);

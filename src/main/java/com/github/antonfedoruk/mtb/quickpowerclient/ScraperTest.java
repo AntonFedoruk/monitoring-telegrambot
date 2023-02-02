@@ -10,15 +10,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
 public class ScraperTest {
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "/home/anton/chromedrivers/chromedriver_97_linux64/chromedriver");
-        WebDriver driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver", "/home/anton/Programs/chromedrivers/chromedriver");
+//        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        WebDriver driver;
+        try {
+            driver = new RemoteWebDriver(new URL("http://localhost:4444"), options);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
 
         driver.get("https://admin.qp.kiev.ua");
 

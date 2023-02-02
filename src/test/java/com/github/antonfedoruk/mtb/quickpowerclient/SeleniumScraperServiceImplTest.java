@@ -3,17 +3,22 @@ package com.github.antonfedoruk.mtb.quickpowerclient;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.PropertySource;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 @PropertySource("classpath:application.properties ")
 @DisplayName("Integration-level testing for JavaRushGroupClientImplTest")
 class SeleniumScraperServiceImplTest {
 
-    private String login = ApplicationProperties.getProperty("quickpower.login.value");
-    private String password = ApplicationProperties.getProperty("quickpower.password.value");
-    private String url = ApplicationProperties.getProperty("quickpower.url");
+    private final String login = ApplicationProperties.getProperty("quickpower.login.value");
+    private final String password = ApplicationProperties.getProperty("quickpower.password.value");
+    private final String url = ApplicationProperties.getProperty("quickpower.url");
+    private final String chromedriverServerUrl = ApplicationProperties.getProperty("selenium.chromedriver.server.url");
 
     public static LoginPage loginPage;
 //    public static StationsPage stationsPage;
@@ -23,13 +28,17 @@ class SeleniumScraperServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        System.setProperty("webdriver.chrome.driver", "/home/anton/chromedrivers/chromedriver_97_linux64/chromedriver");
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        try {
+            driver = new RemoteWebDriver(new URL(chromedriverServerUrl), options);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(url);
 
-        SeleniumScraperServiceImpl seleniumScraperService = new SeleniumScraperServiceImpl((ChromeDriver) driver);
+        SeleniumScraperServiceImpl seleniumScraperService = new SeleniumScraperServiceImpl((RemoteWebDriver) driver);
         seleniumScraperService.setQuickpowerUrl(url);
         seleniumScraperService.setLogin(login);
         seleniumScraperService.setPassword(password);
