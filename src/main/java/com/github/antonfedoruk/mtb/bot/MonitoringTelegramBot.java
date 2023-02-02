@@ -50,7 +50,6 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
             String username = update.getMessage().getFrom().getUserName();
             if (message.startsWith(COMMAND_PREFIX)) {
                 String commandIdentifier = message.split(" ")[0].toLowerCase();
-
                 commandContainer.findCommand(commandIdentifier, username).execute(update);
             } else {
                 commandContainer.findCommand(NO.getCommandName(), username).execute(update);

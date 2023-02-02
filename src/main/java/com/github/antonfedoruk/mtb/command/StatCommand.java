@@ -16,7 +16,6 @@ public class StatCommand implements Command {
     private final SendBotMessageService sendBotMessageService;
 
     public static String STAT_MESSAGE = "✨<b>Статистика</b>✨\n\n"
-
                     + " - Кількість активних користувачів: %s\n"
                     + " - Кількість неактивних користувачів: %s\n"
                     + " - середня кількість станцій яка відслідковується: %s\n\n"
