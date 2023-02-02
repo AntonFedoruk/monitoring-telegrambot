@@ -1,6 +1,7 @@
 package com.github.antonfedoruk.mtb.service;
 
 import com.github.antonfedoruk.mtb.quickpowerclient.dto.Station;
+import com.github.antonfedoruk.mtb.quickpowerclient.dto.StationStatus;
 import com.github.antonfedoruk.mtb.repository.StationSubRepository;
 import com.github.antonfedoruk.mtb.repository.entity.StationSub;
 import com.github.antonfedoruk.mtb.repository.entity.TelegramUser;
@@ -36,17 +37,22 @@ class StationSubServiceTest {
     }
 
     @Test
-    @DisplayName("Should properly save group")
-    void shouldProperlySaveGroup() {
+    @DisplayName("Should properly save station")
+    void shouldProperlySaveStation() {
         // given
         Station station = new Station();
         station.setId(1);
-        station.setAddress("g1");
+        station.setName("s1");
+        station.setStationStatus(StationStatus.ONLINE);
+
 
         StationSub expectedStationSub = new StationSub();
         expectedStationSub.setId(station.getId());
-        expectedStationSub.setTitle(station.getAddress());
+        expectedStationSub.setTitle(station.getName());
         expectedStationSub.addUser(newUser);
+        expectedStationSub.setLastStatus(station.getStationStatus());
+
+        Mockito.when(stationSubRepository.findById(station.getId())).thenReturn(Optional.empty());
 
         // when
         stationSubService.save(CHAT_ID, station);
