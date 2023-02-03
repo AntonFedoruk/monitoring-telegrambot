@@ -29,11 +29,21 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
+      
+      - name: Show file content
+        run: |
+          ls -a
+          
+      - name: Create file
+        run: |
+          echo 'selenium.chromedriver.server.url=${{ secrets.CHROMEDRIVER_SERVER }}' > src/test/resources/application.properties
+          echo 'quickpower.url=${{ secrets.QP_URL }}' >> src/test/resources/application.properties
+          echo 'quickpower.login.value=${{ secrets.QP_LOGIN }}' >> src/test/resources/application.properties
+          echo 'quickpower.password.value=${{ secrets.QP_PWD }}' >> src/test/resources/application.properties
           
       - name: Show file content
         run: |
-          pwd
-          ls -la
+          ls -a
           
       - name: Build with Maven
         run: |
