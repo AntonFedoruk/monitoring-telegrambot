@@ -13,6 +13,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    container:
+      image: adoptopenjdk/openjdk11:ubi
+    
+    services:
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size=2gb
+        ports:
+          - '4444:4444'
+          - '7900:7900'
+        
     steps:
       - uses: actions/checkout@v2
       
