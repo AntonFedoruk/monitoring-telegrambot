@@ -55,6 +55,6 @@ jobs:
           export TG_MTB_DB_PASSWORD=${{ secrets.TG_MTB_DB_PASSWORD }}
           export TG_MTB_TOKEN=${{ secrets.TG_MTB_TOKEN }}
           export TG_MTB_USERNAME=${{ secrets.TG_MTB_USERNAME }}
-          export TG_MTB_QP_LOGIN=${{ secrets.TG_MTB_QP_LOGIN }}'
+          export TG_MTB_QP_LOGIN=${{ secrets.TG_MTB_QP_LOGIN }}
           export TG_MTB_QP_PASSWORD=${{ secrets.TG_MTB_QP_PASSWORD }}
           mvn -B package --file pom.xml
