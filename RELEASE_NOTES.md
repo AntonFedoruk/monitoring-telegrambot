@@ -1,4 +1,7 @@
 #Release Notes
+## 1.1.1
+* Fixed github Maven CI workflow.
+
 ## 1.1.0
 * Fixed correct implementation of Selenium RemoteWebDriver in Docker.
 
