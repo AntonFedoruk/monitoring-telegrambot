@@ -13,8 +13,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    container:
+      image: adoptopenjdk/openjdk11:ubi
+    
+    services:
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size=2gb
+        ports:
+          - '4444:4444'
+          - '7900:7900'
+        
     steps:
       - uses: actions/checkout@v2
+      
       - name: Set up MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
@@ -23,14 +36,30 @@ jobs:
           mysql root password: 'root'
           mysql user: 'dev_mtb_db_user'
           mysql password: 'dev_mtb_db_password'
+          
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
+          
+      - name: Create file
+        run: |
+          echo 'selenium.chromedriver.server.url=http://selenium:4444' > src/test/resources/application.properties
+          echo 'quickpower.url=https://admin.qp.kiev.ua' >> src/test/resources/application.properties
+          echo 'quickpower.login.value=${{ secrets.QP_LOGIN }}' >> src/test/resources/application.properties
+          echo 'quickpower.password.value=${{ secrets.QP_PWD }}' >> src/test/resources/application.properties
+     
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.8.2
+
       - name: Build with Maven
         run: |
           export TG_MTB_DB_USERNAME=${{ secrets.TG_MTB_DB_USERNAME }}
           export TG_MTB_DB_PASSWORD=${{ secrets.TG_MTB_DB_PASSWORD }}
           export TG_MTB_TOKEN=${{ secrets.TG_MTB_TOKEN }}
           export TG_MTB_USERNAME=${{ secrets.TG_MTB_USERNAME }}
+          export TG_MTB_QP_LOGIN=${{ secrets.TG_MTB_QP_LOGIN }}
+          export TG_MTB_QP_PASSWORD=${{ secrets.TG_MTB_QP_PASSWORD }}
           mvn -B package --file pom.xml
