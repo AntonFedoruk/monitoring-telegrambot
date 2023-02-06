@@ -48,6 +48,11 @@ jobs:
           echo 'quickpower.url=${{ secrets.QP_URL }}' >> src/test/resources/application.properties
           echo 'quickpower.login.value=${{ secrets.QP_LOGIN }}' >> src/test/resources/application.properties
           echo 'quickpower.password.value=${{ secrets.QP_PWD }}' >> src/test/resources/application.properties
+     
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.8.2
 
       - name: Build with Maven
         run: |
