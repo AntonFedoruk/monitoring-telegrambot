@@ -45,7 +45,7 @@ jobs:
       - name: Create file
         run: |
           echo 'selenium.chromedriver.server.url=http://selenium:4444' > src/test/resources/application.properties
-          echo 'quickpower.url=${{ secrets.QP_URL }}' >> src/test/resources/application.properties
+          echo 'quickpower.url=https://admin.qp.kiev.ua' >> src/test/resources/application.properties
           echo 'quickpower.login.value=${{ secrets.QP_LOGIN }}' >> src/test/resources/application.properties
           echo 'quickpower.password.value=${{ secrets.QP_PWD }}' >> src/test/resources/application.properties
      
