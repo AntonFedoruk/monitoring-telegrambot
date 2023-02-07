@@ -17,9 +17,6 @@ public class Station {
     Integer id;
     String name;
     String address;
-    StationModel model;
-    StationFirmware firmware;
     StationStatus stationStatus;
-    List<Connector> connectors;
-    String pictureUrl;
+    List<SubStation> subStations;
 }

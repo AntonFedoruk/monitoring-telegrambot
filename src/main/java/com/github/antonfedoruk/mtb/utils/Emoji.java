@@ -14,7 +14,7 @@ public enum Emoji {
     WARNING(EmojiParser.parseToUnicode(":warning:")),
     SOS(EmojiParser.parseToUnicode(":sos:"));
 
-    private String emojiName;
+    private final String emojiName;
 
     @Override
     public String toString() {
