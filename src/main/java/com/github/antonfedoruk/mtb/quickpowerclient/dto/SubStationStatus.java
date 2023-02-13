@@ -4,15 +4,12 @@ import com.github.antonfedoruk.mtb.utils.Emoji;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * Statuses  of station.
- */
 @Getter
 @AllArgsConstructor
-public enum StationStatus {
-    ONLINE(Emoji.WHITE_CHECK_MARK.toString()),
-    OFFLINE(Emoji.RED_CIRCLE.toString()),
-    CHARGING(Emoji.ELECTRIC_PLUG.toString()),
+public enum SubStationStatus {
+    AVAILABLE(Emoji.FREE.toString()),
+    OCCUPIED(Emoji.ELECTRIC_PLUG.toString()),
+    UNAVAILABLE(Emoji.RED_CIRCLE.toString()),
     ERROR(Emoji.WARNING.toString());
 
     private final String emojiRepresentation;

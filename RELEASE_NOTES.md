@@ -1,4 +1,7 @@
 #Release Notes
+## 1.2.0
+* Added /status admin command. Extended station parameters.
+
 ## 1.1.1
 * Fixed github Maven CI workflow.
 

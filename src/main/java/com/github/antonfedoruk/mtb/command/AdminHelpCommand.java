@@ -5,6 +5,7 @@ import com.github.antonfedoruk.mtb.service.SendBotMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static com.github.antonfedoruk.mtb.command.CommandName.STAT;
+import static com.github.antonfedoruk.mtb.command.CommandName.STATUS;
 import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
 
 /**
@@ -14,10 +15,10 @@ import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
 public class AdminHelpCommand implements Command {
     private final SendBotMessageService sendBotMessageService;
 
-    public static final String ADMIN_HELP_MESSAGE = String.format("✨<b>Доступні команди</b>✨\n\n"
-                    + "<b>Показати статистику</b>\n"
-                    + "%s - показати кількість активних користувачів\n",
-                    STAT.getCommandName());
+    public static final String ADMIN_HELP_MESSAGE = String.format("<b>Доступні команди</b>\n\n"
+                    + "%s - показати кількість активних користувачів\n"
+                    + "%s - відобразити статус станцій\n",
+                    STAT.getCommandName(), STATUS.getCommandName());
 
     public AdminHelpCommand(SendBotMessageService sendBotMessageService) {
         this.sendBotMessageService = sendBotMessageService;
