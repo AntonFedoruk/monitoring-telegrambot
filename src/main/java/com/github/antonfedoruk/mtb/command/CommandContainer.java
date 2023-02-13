@@ -40,6 +40,7 @@ public class CommandContainer {
                 .put(DELETE_STATION_SUB.getCommandName(), new DeleteStationSubCommand(sendBotMessageService, telegramUserService, stationSubService))
                 .put(ADMIN_HELP.getCommandName(), new AdminHelpCommand(sendBotMessageService))
                 .put(STATUS.getCommandName(), new StatusCommand(sendBotMessageService,quickpowerStationClient))
+                .put(ADD_ALL_STATION_SUB.getCommandName(), new AddAllStationsSubCommand(sendBotMessageService,quickpowerStationClient, stationSubService))
                 .build();
 
         unknownCommand = new UnknownCommand(sendBotMessageService);

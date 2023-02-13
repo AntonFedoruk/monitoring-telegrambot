@@ -12,20 +12,21 @@ import static com.github.antonfedoruk.mtb.command.CommandUtils.getChatId;
 public class HelpCommand implements Command {
     private final SendBotMessageService sendBotMessageService;
 
-    public static String HELP_MESSAGE = String.format("✨<b>Доступні команди</b>✨\n\n"
+    public static String HELP_MESSAGE = String.format("<b>Доступні команди</b>\n\n"
 
                     + "<b>Розпочати\\закінчить роботу з ботом:</b>\n"
                     + "%s - розпочать роботу зі мнойю\n"
                     + "%s - призупинити роботу зі мнойю\n\n"
 
                     + "<b>Робота з підписками на моніторинг станцій:</b>\n"
-                    + "%s - підписатись на моніторинг станцій\n"
-                    + "%s - відписатись від моніторингу станцій\n"
+                    + "%s - підписатись на моніторинг станції\n"
+                    + "%s - підписатись на моніторинг всіх станцій\n"
+                    + "%s - відписатись від моніторингу станції\n"
                     + "%s - відобразити список підписок на моніторинг\n\n"
 
                     + "%s - отримати допомогу в роботі зі мною.\n",
             START.getCommandName(), STOP.getCommandName(), ADD_STATION_SUB.getCommandName(),
-            DELETE_STATION_SUB.getCommandName(), LIST_STATION_SUB.getCommandName(),
+            ADD_ALL_STATION_SUB.getCommandName(), DELETE_STATION_SUB.getCommandName(), LIST_STATION_SUB.getCommandName(),
             HELP.getCommandName());
 
     // DO NOT USE @Autowired to get 'sendBotMessageService' bean from Application Context, to avoid circle dependency.
