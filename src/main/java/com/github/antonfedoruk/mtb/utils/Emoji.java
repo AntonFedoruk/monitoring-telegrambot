@@ -8,10 +8,14 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum Emoji {
-    GREEN_CIRCLE(EmojiParser.parseToUnicode(":green_circle:")),
+    WHITE_CHECK_MARK(EmojiParser.parseToUnicode(":white_check_mark:")),
+    FREE(EmojiParser.parseToUnicode(":free:")),
     RED_CIRCLE(EmojiParser.parseToUnicode(":red_circle:")),
+//    BLUE_CIRCLE(EmojiParser.parseToUnicode(":blue_circle:")), //not displayed
+    ELECTRIC_PLUG(EmojiParser.parseToUnicode(":electric_plug:")),
     BATTERY(EmojiParser.parseToUnicode(":battery:")),
     WARNING(EmojiParser.parseToUnicode(":warning:")),
+    ZAP(EmojiParser.parseToUnicode(":zap:")),
     SOS(EmojiParser.parseToUnicode(":sos:"));
 
     private final String emojiName;
